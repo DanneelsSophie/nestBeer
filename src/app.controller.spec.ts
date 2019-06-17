@@ -16,9 +16,9 @@ describe('Users Controller', () => {
     expect(controller).toBeDefined();
   });
 
-  it('should return hello world', () => {
+  /**it('should return hello world', () => {
     expect(controller.root()).toEqual({ message: 'Hello world ! 🦄' });
-  });
+  });**/
 
   // it('should call the sendFile method of the HTTP Response', () => {
   //   const response = {

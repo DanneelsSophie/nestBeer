@@ -1,8 +1,12 @@
-import {Body, Controller, Delete, Get, Module, Param, Post, Put, HttpStatus, HttpException} from '@nestjs/common';
-import {ApiModelProperty, ApiResponse} from "@nestjs/swagger";
+import {
+    Body, Controller, Delete, Get, Module, Param, Post, Put, HttpStatus, HttpException,
+    UseGuards
+} from '@nestjs/common';
+import {ApiBearerAuth, ApiModelProperty, ApiResponse} from "@nestjs/swagger";
 import {Beer} from "./entities/beer.interface";
 import {BeersService} from "./beers.service";
 import {BeerDto} from "./beer.dto";
+import {AuthGuard} from "@nestjs/passport";
 
 
 
@@ -27,11 +31,15 @@ export class BeersController {
         return beer;
     }
 
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard('jwt'))
     @Put('beer')
     addABeer(@Body() beer : BeerDto): void{
       this.beersService.addABeer(beer);
     }
 
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard('jwt'))
     @Post('beer')
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     UpdateABeerById(@Body() beer : BeerDto): void{

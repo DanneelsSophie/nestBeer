@@ -31,7 +31,7 @@ export class BeersService {
     {
         this.beers.forEach((beerItem, index) => {
             if (beerItem.id == beer.id)
-                this.beers[index] = beerItem;
+                this.beers[index] = beer;
 
         })
     }

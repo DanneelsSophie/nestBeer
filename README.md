@@ -52,3 +52,4 @@ $ npm run test:cov
 ## License
 
 BaaS is [MIT licensed](LICENSE). 🍻
+https://github.com/typestack/class-validator

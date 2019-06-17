@@ -1,7 +1,8 @@
-import {Body, Controller, Delete, Get, Module, Param, Post, Put} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Module, Param, Post, Put, HttpStatus, HttpException} from '@nestjs/common';
 import {ApiModelProperty, ApiResponse} from "@nestjs/swagger";
-import {Beer} from "./beer.interface";
+import {Beer} from "./entities/beer.interface";
 import {BeersService} from "./beers.service";
+import {BeerDto} from "./beer.dto";
 
 
 
@@ -16,17 +17,24 @@ export class BeersController {
 
     @Get('beer/:id')
     getABeerById (@Param('id') id : number) : Beer{
-        return this.beersService.findById(id);
+        const beer = this.beersService.findById(id);
+        if (beer === undefined) {
+            throw new HttpException(
+                `Cannot find a beer 🍺 with id ${id}`,
+                HttpStatus.NOT_FOUND,
+            );
+        }
+        return beer;
     }
 
     @Put('beer')
-    addABeer(@Body() beer : Beer): void{
+    addABeer(@Body() beer : BeerDto): void{
       this.beersService.addABeer(beer);
     }
 
     @Post('beer')
     @ApiResponse({ status: 403, description: 'Forbidden.'})
-    UpdateABeerById(@Body() beer : Beer): void{
+    UpdateABeerById(@Body() beer : BeerDto): void{
         this.beersService.updateABeerById(beer);
     }
 

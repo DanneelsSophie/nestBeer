@@ -1,5 +1,6 @@
-import {Get, Controller, Render, Param, Res} from '@nestjs/common';
+import {Get, Controller, Render, Param, Res, UseGuards} from '@nestjs/common';
 import {ApiModelProperty, ApiResponse} from '@nestjs/swagger';
+import {AuthGuard} from "@nestjs/passport";
 
 
 class Address {
@@ -28,4 +29,10 @@ export class AppController {
     image(@Param('imageName') imageName, @Res() res) {
         return res.sendFile(`img/${imageName}`, { root: 'static' });
     }
+
+   /** @Get('users')
+    @UseGuards(AuthGuard())
+    findAll() {
+        return [];
+    }**/
 }

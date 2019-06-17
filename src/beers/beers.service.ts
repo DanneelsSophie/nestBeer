@@ -1,5 +1,5 @@
 import {Injectable, Param} from '@nestjs/common';
-import { Beer } from './/Beer.interface';
+import { Beer } from './entities/Beer.interface';
 import {ApiResponse} from "@nestjs/swagger";
 
 @Injectable()
